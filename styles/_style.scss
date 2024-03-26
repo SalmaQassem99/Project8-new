@@ -7,6 +7,7 @@ $padding: 1.5rem;
 $gap: 1rem;
 $gap-1: 7rem;
 $gap-2: 10vh;
+$gap-3: 0.5rem;
 $border-radius: 0.75rem;
 $width: 85%;
 %fixed-position {
@@ -149,13 +150,15 @@ $width: 85%;
   padding: $padding;
   position: relative;
   overflow-y: auto;
-  visibility: hidden;
-  background-image: url("../media/images/background.svg");
   background-size: cover;
   background-position: 50% 100%;
-  &.hide {
-    animation-name: scaleDown;
-    animation-duration: 0.5s;
+  visibility: hidden;
+  transform-origin: left top;
+
+  &.hideGame {
+    animation-name: hideGame;
+    animation-timing-function: linear;
+    animation-duration: 0.7s;
     animation-iteration-count: 1;
   }
   .head {
@@ -367,11 +370,15 @@ $width: 85%;
         gap: $gap;
         @include mediaQuery($medScreen_min_width) {
           & {
-            //max-height: calc((100% - $gap-1) * 0.8);
+            gap: $gap-3;
+          }
+        }
+        @include mediaQuery($largeScreen_min_width) {
+          & {
+            gap: $gap;
           }
         }
         .card-item {
-          //gap: 10%;
           color: $black-1;
           background-color: $white-2;
           border-radius: $border-radius;
@@ -385,10 +392,15 @@ $width: 85%;
           }
           .img-wrapper {
             height: calc((100% - 10%) * 0.7);
-            padding: 1rem 1rem 0 1rem;
+            padding: 2vh 2vh 0 2vh;
+            @include mediaQuery($medScreen_min_width) {
+              & {
+                padding: 1rem 1rem 0 1rem;
+              }
+            }
             .img-container {
               height: 100%;
-              padding: 1rem 0.5rem 0.5rem;
+              padding: 2vh 1vh 1vh;
               position: relative;
               background-color: $white-1;
               &::before {
@@ -405,6 +417,11 @@ $width: 85%;
                 border-radius: 50%;
                 box-shadow: 0 0.25rem 0 $black-3;
               }
+              @include mediaQuery($medScreen_min_width) {
+                & {
+                  padding: 1rem 0.5rem 0.5rem;
+                }
+              }
               img {
                 object-fit: contain;
               }
@@ -412,7 +429,6 @@ $width: 85%;
           }
           .text {
             width: 100%;
-            //height: calc((100% - 10%) * 0.3);
             @extend %text;
             background-color: transparent;
             color: transparent;
@@ -487,7 +503,12 @@ $width: 85%;
         gap: $gap;
         @include mediaQuery($medScreen_min_width) {
           & {
-            //max-height: calc((100% - $gap-1) * 0.2);
+            gap: $gap-3;
+          }
+        }
+        @include mediaQuery($largeScreen_min_width) {
+          & {
+            gap: $gap;
           }
         }
         .match-card-wrapper {
@@ -742,6 +763,16 @@ $width: 85%;
 
   100% {
     transform: translateZ(-1px) scaleX(1);
+  }
+}
+
+@keyframes hideGame {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
   }
 }
 

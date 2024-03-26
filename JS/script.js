@@ -13,8 +13,6 @@ const textItems = document.querySelectorAll(
 );
 const cardsText = document.querySelectorAll(".cards .card-item .text");
 const successModal = document.querySelector(".success-wrapper");
-const closeButton = document.querySelector(".closeModal");
-const overlay = document.querySelector(".overlay");
 const arrows = document.querySelectorAll(".game .body .arrow");
 const pauseButton = document.querySelector(".game .pause.icon");
 const iconsArr = [...arrows, pauseButton];
@@ -97,7 +95,6 @@ cardsText.forEach((cardItem) => {
     if (index === textId) {
       cardItem.style.color = "inherit";
       cardItem.style.backgroundColor = "#fcdc6c";
-      document.querySelector("#correct-audio").play();
       const textContent = text.textContent;
       counter += 1;
       document.querySelector(
@@ -112,14 +109,19 @@ cardsText.forEach((cardItem) => {
         cardItem.classList.remove("animate");
       });
       text.style.visibility = "hidden";
-      if (counter === cardsText.length) {
-        const text = document.querySelector(".text-card .score-text");
-        text.textContent = `${counter}/${cardsText.length}`;
-        text.setAttribute("text", `${counter}/${cardsText.length}`);
-        successModal.style.visibility = "visible";
-        successModal.classList.add("show");
-        overlay.classList.add("show");
-      }
+      const audio = document.querySelector("#correct-audio");
+      audio.play();
+      audio.addEventListener("ended", () => {
+        if (counter === cardsText.length) {
+          const text = document.querySelector(".text-card .score-text");
+          text.textContent = `${counter}/${cardsText.length}`;
+          text.setAttribute("text", `${counter}/${cardsText.length}`);
+          successModal.style.visibility = "visible";
+          successModal.classList.add("show");
+          overlay.classList.add("show");
+          document.querySelector(`audio[id="success"]`).play();
+        }
+      });
     } else {
       document.querySelector("#wrong-audio").play();
       text.classList.add("vibrate");
@@ -130,27 +132,6 @@ cardsText.forEach((cardItem) => {
       });
     }
   });
-});
-const addCloseAnimation = () => {
-  closeButton.classList.add("animate");
-  closeButton.addEventListener("animationend", () => {
-    closeButton.classList.remove("animate");
-  });
-  successModal.classList.add("hide");
-  successModal.style.visibility = "hidden";
-  overlay.classList.remove("show");
-};
-document.addEventListener("click", function (event) {
-  const isVisible =
-    window.getComputedStyle(successModal).visibility === "visible";
-  var isClickInside =
-    successModal.contains(event.target) || event.target === closeButton;
-  if (!isClickInside && isVisible) {
-    addCloseAnimation();
-  }
-});
-closeButton.addEventListener("click", () => {
-  addCloseAnimation();
 });
 const hideItems = () => {
   iconsArr.forEach((item) => {

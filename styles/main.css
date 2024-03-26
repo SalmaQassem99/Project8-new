@@ -204,14 +204,15 @@ a {
   padding: 1.5rem;
   position: relative;
   overflow-y: auto;
-  visibility: hidden;
-  background-image: url("../media/images/background.svg");
   background-size: cover;
   background-position: 50% 100%;
+  visibility: hidden;
+  transform-origin: left top;
 }
-.game.hide {
-  animation-name: scaleDown;
-  animation-duration: 0.5s;
+.game.hideGame {
+  animation-name: hideGame;
+  animation-timing-function: linear;
+  animation-duration: 0.7s;
   animation-iteration-count: 1;
 }
 .game .head {
@@ -404,6 +405,16 @@ a {
   max-height: calc((100% - 10vh) * 0.8);
   gap: 1rem;
 }
+@media (min-width: 768px) {
+  .game .body .body-wrapper .cards {
+    gap: 0.5rem;
+  }
+}
+@media (min-width: 992px) {
+  .game .body .body-wrapper .cards {
+    gap: 1rem;
+  }
+}
 .game .body .body-wrapper .cards .card-item {
   color: #000;
   background-color: rgba(255, 255, 255, 0.5);
@@ -419,11 +430,16 @@ a {
 }
 .game .body .body-wrapper .cards .card-item .img-wrapper {
   height: 63%;
-  padding: 1rem 1rem 0 1rem;
+  padding: 2vh 2vh 0 2vh;
+}
+@media (min-width: 768px) {
+  .game .body .body-wrapper .cards .card-item .img-wrapper {
+    padding: 1rem 1rem 0 1rem;
+  }
 }
 .game .body .body-wrapper .cards .card-item .img-wrapper .img-container {
   height: 100%;
-  padding: 1rem 0.5rem 0.5rem;
+  padding: 2vh 1vh 1vh;
   position: relative;
   background-color: #fff;
 }
@@ -440,6 +456,11 @@ a {
   border-style: solid;
   border-radius: 50%;
   box-shadow: 0 0.25rem 0 rgba(45, 43, 57, 0.2);
+}
+@media (min-width: 768px) {
+  .game .body .body-wrapper .cards .card-item .img-wrapper .img-container {
+    padding: 1rem 0.5rem 0.5rem;
+  }
 }
 .game .body .body-wrapper .cards .card-item .img-wrapper .img-container img {
   -o-object-fit: contain;
@@ -486,6 +507,16 @@ a {
 .game .body .body-wrapper .match-cards {
   max-height: calc((100% - 10vh) * 0.2);
   gap: 1rem;
+}
+@media (min-width: 768px) {
+  .game .body .body-wrapper .match-cards {
+    gap: 0.5rem;
+  }
+}
+@media (min-width: 992px) {
+  .game .body .body-wrapper .match-cards {
+    gap: 1rem;
+  }
 }
 .game .body .body-wrapper .match-cards .match-card-wrapper .match-card {
   width: 100%;
@@ -692,6 +723,14 @@ a {
   }
   100% {
     transform: translateZ(-1px) scaleX(1);
+  }
+}
+@keyframes hideGame {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
   }
 }
 @keyframes scaleDown {
