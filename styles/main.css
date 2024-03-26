@@ -144,7 +144,7 @@ a {
   max-height: 3rem;
   aspect-ratio: 1;
   position: relative;
-  z-index: 100;
+  z-index: 1000;
   background: linear-gradient(to bottom, #febf47 2%, #f0b700);
   color: #fff;
   font-size: 1.25rem;
@@ -196,6 +196,10 @@ a {
   top: calc(100vh - 3rem);
   transform: translateY(-100%);
   transition: 0.5s;
+  visibility: hidden;
+}
+.icon.pause .fa-solid.hide {
+  display: none;
 }
 
 .game {
