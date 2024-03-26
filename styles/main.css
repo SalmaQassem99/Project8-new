@@ -407,6 +407,7 @@ a {
 }
 @media (min-width: 768px) {
   .game .body .body-wrapper .cards {
+    max-height: calc((100% - 7rem) * 0.8);
     gap: 0.5rem;
   }
 }
@@ -510,6 +511,7 @@ a {
 }
 @media (min-width: 768px) {
   .game .body .body-wrapper .match-cards {
+    max-height: calc((100% - 7rem) * 0.2);
     gap: 0.5rem;
   }
 }

@@ -370,6 +370,7 @@ $width: 85%;
         gap: $gap;
         @include mediaQuery($medScreen_min_width) {
           & {
+            max-height: calc((100% - $gap-1) * 0.8);
             gap: $gap-3;
           }
         }
@@ -503,6 +504,7 @@ $width: 85%;
         gap: $gap;
         @include mediaQuery($medScreen_min_width) {
           & {
+            max-height: calc((100% - $gap-1) * 0.2);
             gap: $gap-3;
           }
         }
